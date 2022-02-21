@@ -1,0 +1,46 @@
+*** KulsoKomp depencency-je***
+<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+<dependency>
+    <groupId>com.google.guava</groupId>
+    <artifactId>guava</artifactId>
+    <version>31.0.1-jre</version>
+</dependency>
+
+configuration processor
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor -->
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-configuration-processor</artifactId>
+	<version>2.6.3</version>
+</dependency>
+
+validation
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation -->
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-validation</artifactId>
+	<version>2.6.3</version>
+</dependency>
+
+
+@Bean: nem általunk írt osztályok implementálása a kódba, framework által elérhető. Bean-el lehet Autowired stb használni
+@Component: olyan Bean, amit külön tudunk definiálni. kötelező üres konstruktor (ha kell neki paraméter, nem lehet kompnens) 
+@PostConstruct: amikor már minden más be van állítva, akkor fut le (nem lehet paramétere)
+	az összes Autowired-es property-re lehet hivatkozni vele
+@PropertySource("source"): hol keresse a property-t
+@ConfigurationProperties(prefix = "név")-hez kell @EnableConfigurationProperties({PropertyOsztályNeve.class}) honnan szedi a property-t (final-ként adjuk át)
+
+EventBus eseményei:
+.register(this) : az adott osztály feliratkozik az eventBus csatornájára, hogy értesítést kapjon
+.post(new eventEvent()) : eseményt posztol az eventBusba
+
+singleton objektum: csak egy jön létre belőle, azt fogja minden pbjektum használni
+prototype: mindíg új fog létrejönni ha a Bean-re request jön
+
+INTERFACE kell ha nem tudom hogy több osztály közül melyiket fogom használni
+@Configuration-ben lehet @Bean itt derül ki melyik osztály kell
+a Property megmondja a Bean tartalmát @PropertySource kell!
+Ha az osztalyProperty.getOsztaly == megadott érték >>> megfelleő osztályból újat hoz létre
+
+VALIDATION @NotNull @Min(1) @Max(2) 
+@Notnull-hoz kell neki alapérték Validationbe pl Defaultertek = 1;
